@@ -3,6 +3,7 @@ bin
 usr/
 etc/
 lib
+lib64
 src/
 tools/
 lost+found/

@@ -11,7 +11,7 @@ make_dir() {
     mkdir -pv $LFS/{tools,src}
 
     case $(uname -m) in
-        x86-64) mkdir -pv $LFS/lib64 ;;
+        x86_64) mkdir -pv $LFS/lib64 ;;
     esac
 }
 
