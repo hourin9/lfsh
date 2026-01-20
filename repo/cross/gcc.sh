@@ -58,5 +58,10 @@ pkg_build() {
 pkg_install() {
     cd "$NAME-$VERSION"/build/
     make install
+
+    cd ..
+    local file=$($LFS/tools/bin/$LFS_TGT-gcc -print-libgcc-file-name)
+    cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
+        `dirname $file`/include/limits.h
 }
 
