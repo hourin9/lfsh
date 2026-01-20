@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 make_dir() {
     mkdir -pv $LFS/{etc,var} $LFS/usr/{bin,lib,sbin}
     for i in bin lib sbin; do
@@ -32,8 +34,8 @@ _install() {
     fi
 
     pushd "$LFS/src/" > /dev/null
-        wget -nc -nv $URL
-        unpack
+        wget -nc $URL
+        ( unpack )
         ( pkg_build )
         ( pkg_install )
     popd > /dev/null
