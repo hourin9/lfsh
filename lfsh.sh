@@ -21,7 +21,7 @@ ready() {
     export MAKEFLAGS=-j$(nproc)
 }
 
-install() {
+_install() {
     if [ -e $LFS/repo/$1 ]; then
         source "$LFS/repo/$1"
     elif [ -e $LFS/repo/$1.sh ]; then
@@ -37,6 +37,22 @@ install() {
         ( pkg_build )
         ( pkg_install )
     popd > /dev/null
+}
+
+install() {
+    local total=0
+    for i in $@; do
+        local start=$(date +%s)
+        _install "$i"
+        local end=$(date +%s)
+        local build_time=$(($end - $start))
+        total=$total+$build_time
+    done
+
+    for i in $@; do
+        printf "%s " $i
+    done
+    printf "took %dm %ds\n" $((total/60)) $((total%60))
 }
 
 check() {
