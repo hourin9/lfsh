@@ -21,6 +21,24 @@ ready() {
     export MAKEFLAGS=-j$(nproc)
 }
 
+install() {
+    if [ -e $LFS/repo/$1 ]; then
+        source "$LFS/repo/$1"
+    elif [ -e $LFS/repo/$1.sh ]; then
+        source "$LFS/repo/$1.sh"
+    else
+        echo "Package $1 not found"
+        exit 1
+    fi
+
+    pushd "$LFS/src/" > /dev/null
+        wget -nc -nv $URL
+        unpack
+        pkg_build
+        pkg_install
+    popd > /dev/null
+}
+
 check() {
     if [ -z "$LFS" ]; then
         exit 1
