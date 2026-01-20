@@ -21,5 +21,17 @@ ready() {
     export MAKEFLAGS=-j$(nproc)
 }
 
-"$1"
+check() {
+    if [ -z "$LFS" ]; then
+        exit 1
+    fi
+
+    if [ "$EUID" -eq 0 ]; then
+        exit 2
+    fi
+
+    exit 0
+}
+
+func=$1; shift; $func "$@"
 
