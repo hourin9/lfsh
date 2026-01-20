@@ -1,5 +1,9 @@
-*
-
-!lfsh.sh
-!.gitignore
+sbin
+bin
+usr/
+etc/
+lib
+src/
+tools/
+lost+found/
 

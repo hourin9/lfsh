@@ -34,8 +34,8 @@ install() {
     pushd "$LFS/src/" > /dev/null
         wget -nc -nv $URL
         unpack
-        pkg_build
-        pkg_install
+        ( pkg_build )
+        ( pkg_install )
     popd > /dev/null
 }
 
