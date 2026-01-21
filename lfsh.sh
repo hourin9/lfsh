@@ -71,6 +71,24 @@ check() {
     exit 0
 }
 
+clean() {
+    if [ -z "$LFS" ]; then
+        exit 1
+    fi
+
+    read -p "Clean ALL build dirs? (y)Yes/n(No): " choice
+    case $choice in
+        [yY]* ) echo "Proceeding" ;;
+        [nN]* ) exit 1 ;;
+        * ) exit 1 ;;
+    esac
+
+    for dir in $LFS/src/*/; do
+        [ "$(basename "$dir")" == "patches" ] && continue
+        rm -rf "$dir"
+    done
+}
+
 mount_vfs() {
     if [ -z "$LFS" ]; then
         exit 1
