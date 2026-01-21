@@ -28,6 +28,6 @@ pkg_install() {
     make DESTDIR=$LFS install
 
     # Remove libtool archive files
-    rm -v $LFS/usr/lib/lib{stdc++,{,exp,fs},supc++}.la
+    rm -v $LFS/usr/lib/lib{stdc++{,exp,fs},supc++}.la
 }
 
