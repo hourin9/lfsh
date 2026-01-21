@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 make_dir() {
     mkdir -pv $LFS/{etc,var} $LFS/usr/{bin,lib,sbin}
     for i in bin lib sbin; do
@@ -44,6 +42,8 @@ _install() {
 }
 
 install() {
+    set -e
+
     local total=0
     for i in $@; do
         local start=$(date +%s)
